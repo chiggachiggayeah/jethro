@@ -12,7 +12,7 @@ var gutil = require('gulp-util');
 gulp.task('browserify', function () {
   // set up the browserify instance on a task basis
   var b = browserify({
-    entries: './js/client.js',
+    entries: './js/client/client.js',
     debug: true
   });
 
@@ -25,4 +25,10 @@ gulp.task('browserify', function () {
         .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./comp/js/'));
+});
+
+gulp.task('default', function(){
+  gulp.watch(['./js/client/client.js'], function(){
+      gulp.run('browserify');
+  });
 });
